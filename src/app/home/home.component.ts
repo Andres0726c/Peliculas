@@ -10,14 +10,16 @@ import { Movie } from '../interfaces/movies';
   standalone: true,
   imports: [FormsModule, RouterModule, FontAwesomeModule],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
 })
 export default class HomeComponent implements OnInit {
-
   searchQuery: string = '';
-  movies: any[] = [];
+  movies: Movie[] = [];
 
-  constructor(private tmdbService: TmdbService, private router: Router) {}
+  constructor(
+    private tmdbService: TmdbService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.getPopularMovies();
@@ -33,7 +35,6 @@ export default class HomeComponent implements OnInit {
     if (this.searchQuery.trim() !== '') {
       this.tmdbService.searchMovies(this.searchQuery).subscribe((data: any) => {
         this.movies = data.results;
-        
       });
     } else {
       this.getPopularMovies();
@@ -42,11 +43,10 @@ export default class HomeComponent implements OnInit {
 
   addToFavorites(movie: Movie) {
     this.tmdbService.addToFavorites(movie);
+    this.movies = this.movies.filter(m => m.id !== movie.id);
   }
 
   navigateToMovieDetails(movieId: number) {
     this.router.navigate(['/movie', movieId]);
   }
-  
-
 }

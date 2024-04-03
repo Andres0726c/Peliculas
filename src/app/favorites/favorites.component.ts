@@ -8,12 +8,12 @@ import { Movie } from '../interfaces/movies';
   standalone: true,
   imports: [RouterModule],
   templateUrl: './favorites.component.html',
-  styleUrl: './favorites.component.css'
+  styleUrl: './favorites.component.css',
 })
 export default class FavoritesComponent implements OnInit {
   favorites: Movie[] = [];
 
-  constructor(private tmdbService: TmdbService) { }
+  constructor(private tmdbService: TmdbService) {}
 
   ngOnInit(): void {
     this.favorites = this.tmdbService.getFavorites();
@@ -24,6 +24,4 @@ export default class FavoritesComponent implements OnInit {
     this.tmdbService.removeFromFavorites(movieId);
     this.favorites = this.tmdbService.getFavorites();
   }
-  
-
 }

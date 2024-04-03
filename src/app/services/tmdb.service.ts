@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Movie } from '../interfaces/movies';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TmdbService {
   private apiKey = '512d612564851957d315a7a59e3c64ab';
@@ -15,8 +16,8 @@ export class TmdbService {
     return this.http.get(`${this.apiUrl}/search/movie`, {
       params: {
         api_key: this.apiKey,
-        query: query
-      }
+        query: query,
+      },
     });
   }
 
@@ -24,8 +25,8 @@ export class TmdbService {
   getPopularMovies() {
     return this.http.get(`${this.apiUrl}/movie/popular`, {
       params: {
-        api_key: this.apiKey
-      }
+        api_key: this.apiKey,
+      },
     });
   }
 
@@ -33,18 +34,18 @@ export class TmdbService {
   getMovieDetails(movieId: any) {
     return this.http.get(`${this.apiUrl}/movie/${movieId}`, {
       params: {
-        api_key: this.apiKey
-      }
+        api_key: this.apiKey,
+      },
     });
   }
-  
+
   //Agregar a favoritos
-  addToFavorites(movie: any) {
+  addToFavorites(movie: Movie) {
     const favorites = this.getFavorites();
     favorites.push(movie);
     localStorage.setItem('favorites', JSON.stringify(favorites));
   }
-  
+
   //Buscar favoritos
   getFavorites() {
     const favorites = localStorage.getItem('favorites');
@@ -54,10 +55,9 @@ export class TmdbService {
   //Eliminar de favoritos
   removeFromFavorites(movieId: number) {
     let favorites = this.getFavorites();
-    favorites = favorites.filter((movie: { id: number; }) => movie.id !== movieId);
+    favorites = favorites.filter(
+      (movie: { id: number }) => movie.id !== movieId
+    );
     localStorage.setItem('favorites', JSON.stringify(favorites));
   }
-  
-  
-
 }

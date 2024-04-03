@@ -8,27 +8,27 @@ import { Movie } from '../interfaces/movies';
   standalone: true,
   imports: [RouterModule],
   templateUrl: './movie-details.component.html',
-  styleUrl: './movie-details.component.css'
+  styleUrl: './movie-details.component.css',
 })
 export default class MovieDetailsComponent implements OnInit {
-
   movie!: Movie;
 
-  constructor(private route: ActivatedRoute, private tmdbService: TmdbService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private tmdbService: TmdbService
+  ) {}
 
   ngOnInit(): void {
     const movieId = this.route.snapshot.paramMap.get('id');
-    console.log('movieId',movieId);
-    
+    console.log('movieId', movieId);
+
     this.tmdbService.getMovieDetails(movieId).subscribe((data: any) => {
       this.movie = data;
       console.log(this.movie);
     });
   }
 
-  addToFavorites(movie: any) {
+  addToFavorites(movie: Movie) {
     this.tmdbService.addToFavorites(movie);
   }
-  
-
 }
