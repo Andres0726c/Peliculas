@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { TmdbService } from '../services/tmdb.service';
+import { Movie } from '../interfaces/movies';
 
 @Component({
   selector: 'app-movie-details',
@@ -11,7 +12,7 @@ import { TmdbService } from '../services/tmdb.service';
 })
 export default class MovieDetailsComponent implements OnInit {
 
-  movie: any;
+  movie!: Movie;
 
   constructor(private route: ActivatedRoute, private tmdbService: TmdbService) { }
 

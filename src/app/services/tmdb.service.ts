@@ -40,14 +40,14 @@ export class TmdbService {
   
   //Agregar a favoritos
   addToFavorites(movie: any) {
-    let favorites = this.getFavorites();
+    const favorites = this.getFavorites();
     favorites.push(movie);
     localStorage.setItem('favorites', JSON.stringify(favorites));
   }
   
   //Buscar favoritos
   getFavorites() {
-    let favorites = localStorage.getItem('favorites');
+    const favorites = localStorage.getItem('favorites');
     return favorites ? JSON.parse(favorites) : [];
   }
 

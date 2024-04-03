@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { TmdbService } from '../services/tmdb.service';
+import { RouterModule } from '@angular/router';
+import { Movie } from '../interfaces/movies';
 
 @Component({
   selector: 'app-favorites',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './favorites.component.html',
   styleUrl: './favorites.component.css'
 })
 export default class FavoritesComponent implements OnInit {
-  favorites: any[] = [];
+  favorites: Movie[] = [];
 
   constructor(private tmdbService: TmdbService) { }
 

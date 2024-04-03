@@ -3,6 +3,7 @@ import { TmdbService } from '../services/tmdb.service';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { Movie } from '../interfaces/movies';
 
 @Component({
   selector: 'app-home',
@@ -39,7 +40,7 @@ export default class HomeComponent implements OnInit {
     }
   }
 
-  addToFavorites(movie: any) {
+  addToFavorites(movie: Movie) {
     this.tmdbService.addToFavorites(movie);
   }
 
