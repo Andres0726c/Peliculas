@@ -12,6 +12,7 @@ import { Movie } from '../interfaces/movies';
 })
 export default class MovieDetailsComponent implements OnInit {
   movie!: Movie;
+  movies: Movie[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -28,7 +29,9 @@ export default class MovieDetailsComponent implements OnInit {
     });
   }
 
+  //Agregar películas a favoritos
   addToFavorites(movie: Movie) {
     this.tmdbService.addToFavorites(movie);
+    this.movies = this.movies.filter(m => m.id !== movie.id);
   }
 }

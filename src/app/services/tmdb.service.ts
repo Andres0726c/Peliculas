@@ -11,7 +11,7 @@ export class TmdbService {
 
   constructor(private http: HttpClient) {}
 
-  //Buscar películas
+  //Buscador de películas "barra de búsqueda"
   searchMovies(query: string) {
     return this.http.get(`${this.apiUrl}/search/movie`, {
       params: {
@@ -21,7 +21,7 @@ export class TmdbService {
     });
   }
 
-  //Buscar películas populares
+  //Traer películas populares
   getPopularMovies() {
     return this.http.get(`${this.apiUrl}/movie/popular`, {
       params: {

@@ -25,12 +25,13 @@ export default class HomeComponent implements OnInit {
     this.getPopularMovies();
   }
 
+  //Mostrar las películas
   getPopularMovies() {
     this.tmdbService.getPopularMovies().subscribe((data: any) => {
       this.movies = data.results;
     });
   }
-
+  // Buscador de películas "barra de búsqueda"
   searchMovies() {
     if (this.searchQuery.trim() !== '') {
       this.tmdbService.searchMovies(this.searchQuery).subscribe((data: any) => {
@@ -41,11 +42,13 @@ export default class HomeComponent implements OnInit {
     }
   }
 
+  //Agregar películas a favoritos
   addToFavorites(movie: Movie) {
     this.tmdbService.addToFavorites(movie);
     this.movies = this.movies.filter(m => m.id !== movie.id);
   }
 
+  //Navegar a pantalla de detalles
   navigateToMovieDetails(movieId: number) {
     this.router.navigate(['/movie', movieId]);
   }
